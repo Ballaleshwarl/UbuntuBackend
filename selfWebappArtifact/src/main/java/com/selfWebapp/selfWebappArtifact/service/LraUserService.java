@@ -1,8 +1,12 @@
 package com.selfWebapp.selfWebappArtifact.service;
 
-import com.selfWebapp.selfWebappArtifact.entity.lraUser;
+import com.selfWebapp.selfWebappArtifact.entity.LraUser;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface LraUserService {
 
-    public String saveUser(lraUser lraUser);
+    public String saveUser(LraUser lraUser);
+
+    public LraUser findByEmail(String email);
 }

@@ -1,9 +1,9 @@
 package com.selfWebapp.selfWebappArtifact.repository;
 
-import com.selfWebapp.selfWebappArtifact.entity.lraUser;
+import com.selfWebapp.selfWebappArtifact.entity.LraUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface LraUserRepository extends JpaRepository<lraUser,Long> {
+public interface LraUserRepository extends JpaRepository<LraUser,Long> {
 
-    lraUser findByName(String name);
+    LraUser findByEmail(String email);
 }
