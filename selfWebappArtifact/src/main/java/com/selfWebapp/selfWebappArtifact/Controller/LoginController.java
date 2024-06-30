@@ -36,7 +36,7 @@ public class LoginController {
         boolean status;
      try {
          LraUser lraUser = lraUserService.findByEmail(lraDto.getEmail());
-         status = true;
+         status = lraUser != null;
      }catch (Exception e){
          status = false;
      }
