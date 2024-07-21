@@ -1,6 +1,7 @@
 package com.selfWebapp.selfWebappArtifact.service;
 
 import com.selfWebapp.selfWebappArtifact.entity.LraUser;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
