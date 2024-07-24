@@ -5,6 +5,8 @@ import com.selfWebapp.selfWebappArtifact.repository.GlobalUsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GlobalUsersServiceImpl implements GlobalUsersService{
 
@@ -18,5 +20,10 @@ public class GlobalUsersServiceImpl implements GlobalUsersService{
           return  true;
       }
         return false;
+    }
+
+    @Override
+    public List<GlobalUsers> getAllGlobalUsers() {
+        return globalUsersRepository.findAll();
     }
 }
