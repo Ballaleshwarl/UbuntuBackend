@@ -1,7 +1,7 @@
 package com.selfWebapp.selfWebappArtifact.entity;
 
 import jakarta.persistence.*;
-import org.springframework.beans.factory.annotation.Value;
+
 
 @Entity
 @Table(name = "globalusers")

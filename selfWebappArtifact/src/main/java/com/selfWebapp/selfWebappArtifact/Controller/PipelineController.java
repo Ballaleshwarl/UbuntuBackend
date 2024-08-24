@@ -2,6 +2,7 @@ package com.selfWebapp.selfWebappArtifact.Controller;
 
 import com.selfWebapp.selfWebappArtifact.entity.GlobalUsers;
 import com.selfWebapp.selfWebappArtifact.service.GlobalUsersService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,5 +55,10 @@ public class PipelineController {
               jsonObject.put("ingested users",-1);
       }
         return jsonObject.toString();
+    }
+
+    @PostMapping("/ingestActivity")
+    public String ingestActivity(HttpServletRequest request){
+        return "";
     }
 }
