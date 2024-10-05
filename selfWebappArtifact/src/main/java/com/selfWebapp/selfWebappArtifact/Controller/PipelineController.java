@@ -1,7 +1,13 @@
 package com.selfWebapp.selfWebappArtifact.Controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.selfWebapp.selfWebappArtifact.constants.Constants;
 import com.selfWebapp.selfWebappArtifact.entity.GlobalUsers;
+import com.selfWebapp.selfWebappArtifact.global.GlobalVariables;
 import com.selfWebapp.selfWebappArtifact.service.GlobalUsersService;
+import com.selfWebapp.selfWebappArtifact.service.KafkaProducerService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -22,6 +28,13 @@ public class PipelineController {
     private static final Logger log = LoggerFactory.getLogger(PipelineController.class);
     @Autowired
     private GlobalUsersService globalUsersService;
+
+    private KafkaProducerService kafkaProducerService;
+
+    @Autowired
+    PipelineController(KafkaProducerService kafkaProducerService){
+        this.kafkaProducerService = kafkaProducerService;
+    }
 
     @PostMapping("/ingestData")
    public String ingestData(@RequestBody List<Map<String,Object>> jsonData ){
@@ -58,7 +71,15 @@ public class PipelineController {
     }
 
     @PostMapping("/ingestActivity")
-    public String ingestActivity(HttpServletRequest request){
+    public String ingestActivity(HttpServletRequest request) throws JsonProcessingException {
+        String jsonString = request.getParameter("data");
+        GlobalVariables.SELECTED_RESOURCE =  request.getParameter(Constants.SELECTED_RESOURCE);
+
+        ObjectMapper objectMapper =  new ObjectMapper();
+        List<Map<String,Object>> jsonData =  objectMapper.readValue(jsonString, new TypeReference<List<Map<String, Object>>>() {
+        });
+
+        this.kafkaProducerService.sendMessage(jsonData);
         return "";
     }
 }
