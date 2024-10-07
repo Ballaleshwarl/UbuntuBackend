@@ -18,8 +18,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import java.util.List;
 import java.util.Map;
+
+import static com.selfWebapp.selfWebappArtifact.constants.Constants.INGESTED_USERS;
 
 @RestController
 @RequestMapping("/pipeline")
@@ -58,14 +61,14 @@ public class PipelineController {
                   count = count + 1;
               }
           }
-          jsonObject.put("ingested users",count);
+          jsonObject.put(INGESTED_USERS,count);
           log.info("Ingestion Ended !");
 
       }catch (Exception e){
           if(e instanceof NoSuchFieldException){
-              jsonObject.put("ingested users",count);
+              jsonObject.put(INGESTED_USERS,count);
           }else
-              jsonObject.put("ingested users",-1);
+              jsonObject.put(INGESTED_USERS,-1);
       }
         return jsonObject.toString();
     }
@@ -80,6 +83,6 @@ public class PipelineController {
         });
 
         this.kafkaProducerService.sendMessage(jsonData);
-        return "";
+        return String.valueOf(GlobalVariables.IS_ACTIVITY_INGESTED);
     }
 }
