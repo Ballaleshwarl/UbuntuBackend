@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface GlobalUsersRepository  extends JpaRepository<GlobalUsers,Long> {
 
+    GlobalUsers findByEmployeeId(String employeeId);
+
 }
