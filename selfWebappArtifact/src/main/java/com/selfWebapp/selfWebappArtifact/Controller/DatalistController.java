@@ -15,7 +15,7 @@ public class DatalistController {
     public ResponseEntity<String> fetchDatalist( @RequestBody  GridTypeDto gridTypeDto){
         DataProvider dataProvider = DataProviderFactory.getDataProvider(gridTypeDto.getGridType());
         String globalUsers = dataProvider.getData();
-        return ResponseEntity.ok(globalUsers);
+        return ResponseEntity.badRequest().body(globalUsers);
     }
 
 }
